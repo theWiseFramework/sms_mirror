@@ -188,7 +188,7 @@ class _HomePageState extends ConsumerState<HomePage> {
                               ),
                             ),
                             const Text(
-                              'SMS and Notification permissions are required to mirror messages.',
+                              'SMS and Notification permissions are required to work.',
                               style: TextStyle(fontSize: 12),
                             ),
                           ],

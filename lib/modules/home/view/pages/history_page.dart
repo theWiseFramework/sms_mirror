@@ -9,7 +9,7 @@ class HistoryPage extends ConsumerWidget {
     final asyncHistory = ref.watch(smsHistoryStreamProvider);
 
     return Scaffold(
-      appBar: AppBar(centerTitle: true, title: const Text('Mirror History')),
+      appBar: AppBar(title: const Text('MIRROR HISTORY')),
       body: asyncHistory.when(
         loading: () => const Center(child: CircularProgressIndicator()),
         error: (error, stackTrace) {
@@ -63,10 +63,10 @@ class HistoryPage extends ConsumerWidget {
                       children: [
                         Text(
                           item.body,
-                          maxLines: 5,
+                          maxLines: 2,
                           overflow: TextOverflow.ellipsis,
                         ),
-                        const SizedBox(height: 6),
+                        const SizedBox(height: 4),
                         Text(
                           _formatTimestamp(item.timestampMillis),
                           style: const TextStyle(fontSize: 12),

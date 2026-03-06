@@ -47,7 +47,6 @@ dependencies {
     implementation("io.objectbox:objectbox-kotlin:5.1.0")
     kapt("io.objectbox:objectbox-processor:5.1.0")
     implementation("com.squareup.okhttp3:okhttp:5.3.2")
-    implementation("com.google.code.gson:gson:2.10.1")
 }
 
 flutter {
