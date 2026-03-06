@@ -13,7 +13,14 @@ class SmsNativeBridge {
   }
 }
 
-Future<bool> getSmsPermissions() async {
+Future<bool> getSmsPermissionsStatus() async {
+  final smsStatus = await Permission.sms.status;
+  final notifStatus = await Permission.notification.status;
+
+  return smsStatus.isGranted && notifStatus.isGranted;
+}
+
+Future<bool> requestPermissions() async {
   Map<Permission, PermissionStatus> statuses = await [
     Permission.sms,
     Permission.notification,
@@ -23,6 +30,7 @@ Future<bool> getSmsPermissions() async {
       statuses[Permission.notification]!.isGranted) {
     return true;
   } else {
+    openAppSettings();
     // Logic for denied permissions
     return false;
   }
