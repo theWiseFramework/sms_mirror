@@ -1,5 +1,7 @@
 import 'package:sms_mirror/common.dart';
 
+const _historySubPath = 'history';
+
 GoRoute homeRoutes([GlobalKey<NavigatorState>? parentNavigatorKey]) {
   return GoRoute(
     path: HomePage.path,
@@ -8,8 +10,8 @@ GoRoute homeRoutes([GlobalKey<NavigatorState>? parentNavigatorKey]) {
     },
     routes: [
       GoRoute(
-        path: HistoryPage.path,
-        builder: (context, state) => HistoryPage(),
+        path: _historySubPath,
+        builder: (context, state) => const HistoryPage(),
       ),
     ],
   );

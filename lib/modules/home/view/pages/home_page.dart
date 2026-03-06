@@ -94,19 +94,55 @@ class _HomePageState extends ConsumerState<HomePage> {
 
     return Scaffold(
       appBar: AppBar(
+        toolbarHeight: kToolbarHeight + 20,
+        leading: Center(
+          child: Material(
+            elevation: 1,
+            clipBehavior: Clip.hardEdge,
+            shape: HeptagonBorder(
+              side: BorderSide(color: Colors.black, width: 3),
+            ),
+            child: InkWell(
+              onTap: () {
+                context.push(HistoryPage.path);
+              },
+              child: SizedBox(
+                height: 34,
+                width: 34,
+                child: Icon(Icons.add_rounded, color: Colors.black87, size: 16),
+              ),
+            ),
+          ),
+        ),
         title: Hero(
           tag: logoImageHeroTag,
           child: Center(
-            child: Image.asset('assets/images/wipay.png', height: 60),
+            child: Image.asset('assets/images/wipay.png', height: 70),
           ),
         ),
         actions: [
-          TextButton(
-            onPressed: () {
-              context.go(HistoryPage.path);
-            },
-            child: Text('History'),
+          Material(
+            elevation: 1,
+            clipBehavior: Clip.hardEdge,
+            shape: HeptagonBorder(
+              side: BorderSide(color: Colors.black, width: 3),
+            ),
+            child: InkWell(
+              onTap: () {
+                context.push(HistoryPage.path);
+              },
+              child: SizedBox(
+                height: 34,
+                width: 34,
+                child: Icon(
+                  Icons.history_rounded,
+                  color: Colors.black87,
+                  size: 16,
+                ),
+              ),
+            ),
           ),
+          SizedBox(width: 14),
         ],
       ),
       body: Column(

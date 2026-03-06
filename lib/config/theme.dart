@@ -13,7 +13,7 @@ abstract final class AppTheme {
   static ThemeData lightTheme = ThemeData(
     useMaterial3: true,
     fontFamily: fontGeistFamily,
-    platform: TargetPlatform.android,
+    platform: TargetPlatform.iOS,
     brightness: Brightness.light,
     primaryColor: orange,
     colorScheme: ColorScheme.fromSeed(

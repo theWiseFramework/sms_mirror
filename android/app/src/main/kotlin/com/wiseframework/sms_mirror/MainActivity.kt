@@ -2,11 +2,14 @@ package com.wiseframework.sms_mirror
 
 import io.flutter.embedding.android.FlutterActivity
 import io.flutter.embedding.engine.FlutterEngine
+import io.flutter.plugin.common.EventChannel
 import io.flutter.plugin.common.MethodCall
 import io.flutter.plugin.common.MethodChannel
 
 class MainActivity : FlutterActivity() {
     private val CHANNEL = "com.wiseframework.sms_mirror/app"
+    private val HISTORY_CHANNEL = "com.wiseframework.sms_mirror/history"
+    private val historyStreamHandler = SmsHistoryStreamHandler()
 
     override fun configureFlutterEngine(flutterEngine: FlutterEngine) {
         super.configureFlutterEngine(flutterEngine)
@@ -23,6 +26,9 @@ class MainActivity : FlutterActivity() {
                 result.error("native_error", e.message, null)
             }
         }
+
+        EventChannel(flutterEngine.dartExecutor.binaryMessenger, HISTORY_CHANNEL)
+            .setStreamHandler(historyStreamHandler)
     }
 
     private fun handleAddSender(call: MethodCall, result: MethodChannel.Result) {

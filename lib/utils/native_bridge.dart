@@ -3,6 +3,9 @@ import 'package:permission_handler/permission_handler.dart';
 
 class SmsNativeBridge {
   static const _methods = MethodChannel('com.wiseframework.sms_mirror/app');
+  static const _historyStream = EventChannel(
+    'com.wiseframework.sms_mirror/history',
+  );
 
   static Future<Map<String, dynamic>> addSender({
     required String sender,
@@ -37,6 +40,16 @@ class SmsNativeBridge {
         .whereType<Map>()
         .map((item) => Map<String, dynamic>.from(item))
         .toList();
+  }
+
+  static Stream<List<Map<String, dynamic>>> historyStream() {
+    return _historyStream.receiveBroadcastStream().map((event) {
+      if (event is! List) return <Map<String, dynamic>>[];
+      return event
+          .whereType<Map>()
+          .map((item) => Map<String, dynamic>.from(item))
+          .toList();
+    });
   }
 }
 
