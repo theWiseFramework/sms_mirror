@@ -19,14 +19,20 @@ class HomePage extends ConsumerWidget {
         ),
         titleSpacing: 1,
       ),
-      body: asyncSenders.when(
-        loading: () => Center(child: CircularProgressIndicator()),
-        error: (error, stackTrace) => Center(child: Text('An Error')),
-        data: (data) {
-          return Wrap(
-            children: [SizedBox(width: size.width / 2, child: Icon(Icons.add))],
-          );
-        },
+      body: Column(
+        children: [
+          Expanded(
+            child: asyncSenders.when(
+              loading: () => Center(child: CircularProgressIndicator()),
+              error: (error, stackTrace) => Center(child: Text('An Error')),
+              data: (data) {
+                return Wrap(
+                  children: [SizedBox(width: size.width / 2, child: Icon(Icons.add))],
+                );
+              },
+            ),
+          ),
+        ],
       ),
     );
   }

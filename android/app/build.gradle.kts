@@ -6,6 +6,8 @@ plugins {
     id("kotlin-android")
     // The Flutter Gradle Plugin must be applied after the Android and Kotlin Gradle plugins.
     id("dev.flutter.flutter-gradle-plugin")
+    id("kotlin-kapt")
+    id("io.objectbox")
 }
 
 android {
@@ -37,6 +39,15 @@ android {
             signingConfig = signingConfigs.getByName("debug")
         }
     }
+}
+
+dependencies {
+    implementation("androidx.work:work-runtime-ktx:2.11.1")
+    implementation("io.objectbox:objectbox-android:5.1.0")
+    implementation("io.objectbox:objectbox-kotlin:5.1.0")
+    kapt("io.objectbox:objectbox-processor:5.1.0")
+    implementation("com.squareup.okhttp3:okhttp:5.3.2")
+    implementation("com.google.code.gson:gson:2.10.1")
 }
 
 flutter {
