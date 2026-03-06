@@ -4,16 +4,43 @@ import 'package:permission_handler/permission_handler.dart';
 class SmsNativeBridge {
   static const _methods = MethodChannel('com.wiseframework.sms_mirror/app');
 
-  static Future<void> addSender(String sender) {
-    return _methods.invokeMethod('addSender', {'sender': sender});
+  static Future<Map<String, dynamic>> addSender({
+    required String sender,
+    required List<String> webhooks,
+  }) async {
+    final raw = await _methods.invokeMethod<dynamic>('addSender', {
+      'sender': sender,
+      'webhooks': webhooks,
+    });
+    if (raw is Map) {
+      return Map<String, dynamic>.from(raw);
+    }
+    throw PlatformException(
+      code: 'invalid_native_response',
+      message: 'addSender did not return sender payload',
+    );
   }
 
-  static Future<void> removeSender(String sender) {
-    return _methods.invokeMethod('removeSender', {'sender': sender});
+  static Future<bool> removeSender(String sender) async {
+    final raw = await _methods.invokeMethod<dynamic>('removeSender', {
+      'sender': sender,
+    });
+    if (raw is bool) return raw;
+    return false;
+  }
+
+  static Future<List<Map<String, dynamic>>> listSenders() async {
+    final raw = await _methods.invokeMethod<dynamic>('listSenders');
+    if (raw is! List) return [];
+
+    return raw
+        .whereType<Map>()
+        .map((item) => Map<String, dynamic>.from(item))
+        .toList();
   }
 }
 
-Future<bool> getSmsPermissionsStatus() async {
+Future<bool> getPermissionsStatus() async {
   final smsStatus = await Permission.sms.status;
   final notifStatus = await Permission.notification.status;
 

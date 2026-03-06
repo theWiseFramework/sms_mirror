@@ -7,7 +7,10 @@ GoRoute homeRoutes([GlobalKey<NavigatorState>? parentNavigatorKey]) {
       return const HomePage();
     },
     routes: [
-   
+      GoRoute(
+        path: HistoryPage.path,
+        builder: (context, state) => HistoryPage(),
+      ),
     ],
   );
 }

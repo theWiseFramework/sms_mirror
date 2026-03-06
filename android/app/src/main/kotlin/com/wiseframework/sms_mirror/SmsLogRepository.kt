@@ -15,6 +15,13 @@ object SmsLogRepository {
         partsCount: Int,
         strategy: String
     ): Long {
+        val existing = box.all.firstOrNull {
+            it.sender == sender &&
+                    it.timestampMillis == timestampMillis &&
+                    it.body == body
+        }
+        if (existing != null) return existing.id
+
         val entity = SmsLogEntity(
             sender = sender,
             timestampMillis = timestampMillis,

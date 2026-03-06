@@ -1,4 +1,3 @@
-import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:sms_mirror/common.dart';
 import 'package:sms_mirror/router.dart';
